@@ -1,26 +1,26 @@
-import './App.css'
-import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
+// App.js
 
-import {TaskPage} from './pages/TaskPage'
-import { TaskFormPage } from './pages/TaskFormPage'
-import {Navigation} from './components/Navigation'
-
-import {Toaster} from 'react-hot-toast'
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './auth/AuthContext';
+import Routes from './routes';
 
 function App() {
-
   return (
-    <BrowserRouter>
-      <Navigation/>
-      <Routes>
-         <Route path='/' element={<Navigate to="tasks"/>} />
-         <Route path='/tasks' element={<TaskPage/>} />
-         <Route path='/task-create' element={<TaskFormPage/>} />
-         <Route path='/tasks/:id' element={<TaskFormPage/>} />
-      </Routes>
-      <Toaster/>
-    </BrowserRouter>
-  )
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          {/* Otros componentes o elementos */}
+          <header>...</header>
+          <main>
+            {/* Agregar las rutas */}
+            <Routes />
+          </main>
+          <footer>...</footer>
+        </div>
+      </Router>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
