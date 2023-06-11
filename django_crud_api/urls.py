@@ -23,6 +23,7 @@ from tasks import views
 router = routers.DefaultRouter()
 router.register('tasks',views.TaskView,'tasks')
 urlpatterns = [
+    path('/', admin.site.urls),
     path('admin/', admin.site.urls),
     path('tasks/', include('tasks.urls')),
     path('tasks/docs/', include_docs_urls(title="Tasks Api") )

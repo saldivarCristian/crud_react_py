@@ -1,25 +1,21 @@
-// routes/index.js
-
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import NotFound from "../pages/NotFound/NotFound";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "../pages/home/Home";
+import NotFound from "../pages/notFound/NotFound";
+import AdminRoutes from "./AdminRoutes";
+import Login from "../pages/login/Login";
 
-// Importar las rutas específicas de admin
-import AdminRoutes from "./admin/AdminRoutes";
-
-const Routes = () => {
+const AppRoutes = () => {
   return (
-    <Switch>
-      <Route exact path="/" component={Home} />
-
-      {/* Rutas para admin */}
-      <Route path="/admin" component={AdminRoutes} />
-
-      {/* Ruta para manejar 404 - Not Found */}
-      <Route component={NotFound} />
-    </Switch>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 };
 
-export default Routes;
+export default AppRoutes;

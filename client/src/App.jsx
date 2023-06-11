@@ -2,23 +2,23 @@
 
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider } from './auth/AuthContext';
-import Routes from './routes';
+import { AuthProvider } from './auth/Authcontext';
+import AppRoutes from "./routes";
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      {/* <Router> */}
         <div className="App">
           {/* Otros componentes o elementos */}
-          <header>...</header>
+          {/* <header>...</header> */}
           <main>
             {/* Agregar las rutas */}
-            <Routes />
+            <AppRoutes />
           </main>
-          <footer>...</footer>
+          {/* <footer>...</footer> */}
         </div>
-      </Router>
+      {/* </Router> */}
     </AuthProvider>
   );
 }

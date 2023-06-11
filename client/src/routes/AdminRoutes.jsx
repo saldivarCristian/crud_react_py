@@ -1,46 +1,50 @@
-// routes/admin/AdminRoutes.js
-
 import React, { useContext } from "react";
-import { Route, Redirect } from "react-router-dom";
-import AdminDashboard from "./AdminDashboard";
-import AdminUser from "./AdminUser";
-import NotFound from "../NotFound/NotFound";
-import { AuthContext } from "../../auth/AuthContext";
+import { Route, Navigate, Routes } from "react-router-dom";
+import AdminDashboard from "../pages/dashboard/Dashboard";
+import AdminUser from "../pages/adminUser/AdminUser";
+import NotFound from "../pages/notFound/NotFound";
+import { AuthContext } from "../auth/Authcontext";
 
-const ProtectedRoute = ({ component: Component, requiredRole, ...rest }) => {
+const ProtectedRoute = ({ path, element: Component, requiredRole }) => {
   const { isAuthenticated, userRole } = useContext(AuthContext);
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated && userRole === requiredRole ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  if (userRole !== requiredRole) {
+    return <Navigate to="/admin" />;
+  }
+
+  return <Route path={path} element={<Component />} />;
 };
 
 const AdminRoutes = () => {
   return (
-    <Switch>
-      <ProtectedRoute
-        exact
-        path="/admin"
-        component={AdminDashboard}
-        requiredRole="admin"
-      />
-      <ProtectedRoute
-        path="/admin/user/:id"
-        component={AdminUser}
-        requiredRole="admin"
-      />
+    <Routes>
 
-      <Route component={NotFound} />
-    </Switch>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute
+            path="/admin"
+            element={AdminDashboard}
+            requiredRole="admin"
+          />
+        }
+      />
+      <Route
+        path="/user/:id"
+        element={
+          <ProtectedRoute
+            path="/admin/user/:id"
+            element={AdminUser}
+            requiredRole="admin"
+          />
+        }
+      />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 
