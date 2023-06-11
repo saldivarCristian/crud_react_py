@@ -7,19 +7,21 @@ import AppRoutes from "./routes";
 
 function App() {
   return (
-    <AuthProvider>
-      {/* <Router> */}
-        <div className="App">
-          {/* Otros componentes o elementos */}
-          {/* <header>...</header> */}
-          <main>
-            {/* Agregar las rutas */}
-            <AppRoutes />
-          </main>
-          {/* <footer>...</footer> */}
-        </div>
-      {/* </Router> */}
-    </AuthProvider>
+     <Router>
+        <AuthProvider>
+          {/* <Router> */}
+            <div className="App">
+              {/* Otros componentes o elementos */}
+              {/* <header>...</header> */}
+              <main>
+                {/* Agregar las rutas */}
+                <AppRoutes />
+              </main>
+              {/* <footer>...</footer> */}
+            </div>
+          {/* </Router> */}
+        </AuthProvider>
+     </Router>
   );
 }
 

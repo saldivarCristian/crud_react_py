@@ -43,9 +43,6 @@ export default function Login() {
     });
   };
 
-  
-
-
   const { login } = useContext(AuthContext);
 
   const handleLogin = () => {
