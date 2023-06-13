@@ -79,10 +79,23 @@ WSGI_APPLICATION = 'django_crud_api.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'sqlany_django',
+        'NAME': 'Univ17',
+        'USER': 'uninorte',
+        'PASSWORD': 'daleo0',
+        'HOST': '138.186.62.98',
+        'PORT': '2638',  # Deja el puerto en blanco para utilizar el valor predeterminado
+        'OPTIONS': {
+            'dsn': 'DRIVER={SQL Anywhere 17};HOST=localhost;DBN=nombre_de_la_basededatos;UID=usuario;PWD=contraseña',
+            'extra_params': 'charset=utf8',
+        },
     }
+    
 }
 
 

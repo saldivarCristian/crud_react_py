@@ -5,7 +5,7 @@ function UnauthorizedPage() {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1" align="center" gutterBottom>
-        303 - Acceso no autorizado
+        403 - Acceso no autorizado
       </Typography>
       <Typography variant="body1" align="center">
         Acceso no autorizado

@@ -1,16 +1,32 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { styled } from "@mui/system";
+
+import Contact from "../../components/inicio/Contact";
+import Hero from "../../components/inicio/Hero";
+import Who from "../../components/inicio/Who";
+import Works from "../../components/inicio/Works";
+
+const Container = styled("div")({
+  height: "100vh",
+  scrollSnapType: "y mandatory",
+  scrollBehavior: "smooth",
+  overflowY: "auto",
+  scrollbarWidth: "none",
+  color: "white",
+  background: 'url("./img/bg.jpeg")',
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+});
 
 function Home() {
   return (
-    <div>
-      <Typography variant="h4" component="h1" align="center" gutterBottom>
-        Bienvenido a la página de inicio
-      </Typography>
-      <Typography variant="body1" align="center">
-        Aquí puedes agregar contenido relevante para tu página de inicio.
-      </Typography>
-    </div>
+    <Container>
+      <Hero/>
+      <Who />
+      {/* <Works /> */}
+      <Contact />
+    </Container>
   );
 }
 

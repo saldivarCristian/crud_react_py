@@ -13,16 +13,16 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const login = () => {
+  const login = (rules = 'admin') => {
     // Lógica para realizar el inicio de sesión y obtener los datos del usuario
     // Actualizar los estados de isAuthenticated y userRole según los datos del usuario
 
     // Guardar los datos en el almacenamiento local
     localStorage.setItem("isAuthenticated", true);
-    localStorage.setItem("userRole", "admin");
+    localStorage.setItem("userRole", rules);
 
     setIsAuthenticated(true);
-    setUserRole("admin");
+    setUserRole(rules);
 
     // Obtener la función navigate del hook useNavigate
     // Redirigir al usuario a la página de administración
@@ -39,6 +39,8 @@ export const AuthProvider = ({ children }) => {
 
     setIsAuthenticated(false);
     setUserRole("");
+        navigate("/");
+
   };
 
   const checkRolePermission = (requiredRole) => {

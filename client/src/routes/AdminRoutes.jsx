@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import AdminDashboard from "../pages/dashboard/Dashboard";
 import AdminUser from "../pages/adminUser/AdminUser";
-import NotFound from "../pages/notFound/NotFound";
 import { AuthContext } from "../auth/Authcontext";
 import UnauthorizedPage from "../pages/unauthorized/Unauthorized";
+import Navbar from "../layouts/Navbar";
+import { Box } from "@mui/material";
 
 const ProtectedRoute = ({ path, element: Component, requiredRole }) => {
   const { isAuthenticated, userRole } = useContext(AuthContext);
@@ -26,10 +27,15 @@ const ProtectedRoute = ({ path, element: Component, requiredRole }) => {
 
 const AdminRoutes = () => {
   return (
-    <Routes>
-      <Route path="/unauthorized" element={<UnauthorizedPage/>} />
-      <Route path="/*" element={<ProtectedRouteWrapper />} />
-    </Routes>
+    <>
+      <Navbar />
+      <Box marginTop="20px">
+        <Routes>
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          <Route path="/*" element={<ProtectedRouteWrapper />} />
+        </Routes>
+      </Box>
+    </>
   );
 };
 
