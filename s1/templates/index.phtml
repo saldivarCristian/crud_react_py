@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <base href="<?= $basePath ?>/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" . />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" . />
+
+    <title>Rifa San Antonio</title>
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <link href="<?= $basePath ?>/assets/plugins/winwheel2/css/style.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- <link rel="stylesheet" href="https://codepen.io/chrisgannon/pen/5ea3499c5fcfe2b1666ba53b25afa6ec.css"> -->
+    <style>
+        body {
+            /* margin: 20px 0 0 0; */
+            /* padding: 0; */
+            /* width: 100%; */
+            /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+            text-align: center;
+            color: #aaa;
+            /* font-size: 18px; */
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        h1 {
+            color: #719e40;
+            letter-spacing: -3px;
+            font-family: 'Lato', sans-serif;
+            font-size: 45px;
+            font-weight: 200;
+            margin-bottom: 0;
+        }
+
+        .mt-auto, .my-auto {
+            margin-top: auto!important;
+        }
+    </style>
+
+</head>
+
+<body style="background-color: #ccf2ff;">
+    <div class=" cover-container d-flex w-100 h-100 p-3 mx-auto flex-column " >
+        <div class="mai">
+            <div class="row text-black">
+                <div class="col-12"><h1>Rifa San Antonio</h1></div>
+                <div class="col-12"><h2>Ticket: <?= $ticket ?></h2></div>
+                <div class="col-12"><h4>Fecha: <?= $fecha ?> </h4></div>
+                <!-- <div class="col-12"><h3>Ciudad: 2020-02-05</h3></div> -->
+            </div>
+        </div>
+
+        <hr>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div id="canvas" data-id="46" class="canvas " style="width: 100%;"></div>
+        </div>
+        <div class="toast">
+            <p/>
+        </div>
+
+        <br>
+        <br>
+
+        <div style="width: 100%;text-align:center;">
+            <button class="btn btn-danger btn-lg spinBtn w-50" >Jugar</button>
+        </div>
+
+        <br>
+        <br>
+    
+
+        <div class="footer">
+            <div class="row text-black">
+                <div class="col-12"><small>Latitud: <?= $lat ?></small></div>
+                <div class="col-12"><small>Longitud: <?= $lon ?></small></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js'></script>
+    <!-- <script src="https://codepen.io/chrisgannon/pen/bbc103e987315728a1190a25753c00e1.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src='<?= $basePath ?>/assets/plugins/winwheel2/js/ThrowPropsPlugin.min.js'></script>
+    <script src='<?= $basePath ?>/assets/plugins/winwheel2/js/Spin2WinWheel.js'></script>
+
+    <script>
+
+        let id = 'canvas'
+        var mySpinBtn = document.querySelector('.spinBtn');
+        let colorArray = ['#f20202', '#1f8430', '#d90d0d', '#398e2e', '#f3d61b']
+        let segmentValuesArray = [
+            {
+                type: 'string',
+                value: 'Sin Premio1',
+                win: true,
+                msg:"HOla",
+                resultText:'HOla que tal1'
+            }, {
+                type: 'string',
+                value: 'Sin Premio2',
+                msg:"HOla",
+                win: true,
+                resultText:'HOla que tal2'
+            }, {
+                type: 'string',
+                value: 'Sin Premio3',
+                msg:"HOla",
+                win: true,
+                resultText:'HOla que tal3'
+            }, {
+                type: 'string',
+                value: 'Sin Premio4',
+                msg:"HOla",
+                win: true,
+                resultText:'HOla que tal4'
+            }, {
+                type: 'string',
+                value: 'Oh!Oh!',
+                win: true,
+                resultText:'Ganaste'
+            }
+        ]
+        let dataRule = {
+            "colorArray": colorArray,
+            "segmentValuesArray": segmentValuesArray,
+            "svgWidth": 1024,
+            "svgHeight": 768,
+            "wheelStrokeColor": "#D0BD0C",
+            "wheelStrokeWidth": 8,
+            "wheelSize": 900,
+            "wheelTextOffsetY": 190,
+            "wheelTextColor": "#000",
+            "wheelTextSize": "2.9em",
+            "wheelImageOffsetY": 40,
+            "wheelImageSize": 88,
+            "centerCircleSize": 70,
+            "centerCircleStrokeColor": "#F1DC15",
+            "centerCircleStrokeWidth": 65,
+            "centerCircleFillColor": "#EDEDED",
+            "segmentStrokeColor": "#F1DC15",
+            "segmentStrokeWidth": 8,
+            "centerX": 512,
+            "centerY": 384,
+            "hasShadows": false,
+            "numSpins": 1,
+            "spinDestinationArray": [1,1,1],
+            "minSpinDuration": 5,
+            "hasSound": true,
+            "gameId": id,
+            "clickToSpin": true
+        }
+
+        // Parse JSON string to an object
+        var jsonData = dataRule;
+        //if you want to spin it using your own button, then create a reference and pass it in as spinTrigger
+        //var mySpinBtn = document.querySelector('.spinBtn');
+        //create a new instance of Spin2Win Wheel and pass in the vars object
+        var theWheel = new Spin2WinWheel(id);
+        //WITH your own button
+        //myWheel.init({data:jsonData, onResult:myResult, onGameEnd:myGameEnd, onError:myError, spinTrigger:mySpinBtn});
+        //WITHOUT your own button
+        theWheel.init({
+            data: jsonData,
+            onResult: myResult,
+            onGameEnd: myGameEnd,
+            onError: myError,
+            spinTrigger:mySpinBtn
+        });
+            
+
+
+        //your own function to capture the spin results
+        function myResult(e) {
+            //e is the result object
+            console.log(e)
+            console.log('Spin Count: ' + e.spinCount + ' - ' + 'Win: ' + e.win + ' - ' + 'Message: ' +  e.msg);
+            console.log(e.target.getGameProgress());
+
+            Swal.fire({
+                title: 'Rifa San Antonio.',
+                text: "Gracias por Participar!",
+                width: 600,
+                padding: '3em',
+                color: '#716add',
+                background: '#fff url(/images/trees.png)',
+                backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("<?= $basePath ?>/explosion.gif")
+                    left top
+                    
+                `
+            })
+
+            $('<audio id="audio"><source src="<?= $basePath ?>/explosion.mp3" type="audio/mpeg"></audio>').appendTo("body");
+            if ($('#audio')[0].play()) {}
+
+
+            // if(e.spinCount == 1){
+                // show the game progress when the spinCount is 3
+            //   console.log(e.target.getGameProgress());
+            //   restart it if you like
+                // e.target.restart();
+            // }  
+
+        }
+
+        //your own function to capture any errors
+        function myError(e) {
+            //e is error object
+            console.log('Spin Count: ' + e.spinCount + ' - ' + 'Message: ' +  e.msg);
+
+        }
+
+        function myGameEnd(e) {
+            //e is gameResultsArray
+            console.log(e);
+            // Spin2WinWheel.reset()
+        }
+
+        // Called by the onClick of the canvas, starts the spinning.
+        function startSpin() {
+            // Stop any current animation.
+            // theWheel[id].stopAnimation(false);
+
+            // Reset the rotation angle to less than or equal to 360 so spinning again works as expected.
+            // Setting to modulus (%) 360 keeps the current position.
+            theWheel.rotationAngle = theWheel.rotationAngle % 360;
+
+            // Start animation.
+            theWheel.startAnimation();
+        }
+
+        $('.spinBtn ').click(function(){
+            $(this).attr('disabled','disabled');
+        })
+    </script>
+</body>
+
+</html>

@@ -1,10 +1,14 @@
 import React from "react";
 import { Grid, Typography, Paper } from "@mui/material";
+import ServerSideTable from "../../components/ServerSideTable/ServerSideTable";
 
 function Dashboard() {
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={5}>
+        <Grid item xs={12}>
+          <ServerSideTable apiURL="http://api.localhost/" />
+        </Grid>
         <Grid item xs={12}>
           <Typography variant="h4" component="h1" align="center" gutterBottom>
             Dashboard
